@@ -17,12 +17,14 @@ let App = React.createClass({
 
   render() {
 
-  	let element = 'a';
-  	let interval = 500;
+  	let min = 100;
+  	let max = 1500;
+
+  	let interval = Math.floor(Math.random() * (max - min)) + min;
     
     return (
       <div>
-          <Column element={element} interval={interval} />
+          <Column interval={interval} />
       </div>
     );
   }
