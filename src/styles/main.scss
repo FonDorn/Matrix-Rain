@@ -1,6 +1,6 @@
 @import "./normalize.css";
 
-$primary-color: green;
+/* $primary-color: green;
 
 h1 {
   color: $primary-color;
@@ -13,3 +13,22 @@ li.task {
     padding: 0 10px;
   }
 }
+ */
+
+$drop-height: 20px;
+$drop-width:  20px;
+$drop-size:	  18px;
+
+.app-drops {
+	width: $drop-width;
+}
+
+.app-drops p {
+	height: $drop-height;
+	width: $drop-width;
+
+	text-align: center;
+	margin: auto;
+	
+	font-size: $drop-size;
+ }

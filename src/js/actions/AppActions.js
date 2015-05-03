@@ -9,10 +9,16 @@ module.exports = {
     });
   },
 
-  createDrop: function(element) {
+  createDrops: function(size) {
     AppDispatcher.handleAction({
-      type: Constants.ActionTypes.ADD_DROP,
-      element: element
+      type: Constants.ActionTypes.CREATE_DROPS,
+      size: size
+    });
+  },
+
+  addDrop: function() {
+    AppDispatcher.handleAction({
+      type: Constants.ActionTypes.ADD_DROP
     });
   }
 

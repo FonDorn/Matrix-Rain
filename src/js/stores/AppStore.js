@@ -1,5 +1,6 @@
 const AppDispatcher = require('../dispatchers/AppDispatcher');
 const Constants = require('../constants/AppConstants');
+const Characters = require('../stores/Characters');
 const EventEmitter = require('events').EventEmitter;
 const assign = require('object-assign');
 const jquery = require('jquery');
@@ -10,7 +11,9 @@ const CHANGE_EVENT = 'change';
 // Local var
 let _width = 0;
 let _height = 0;
+let _dropBoxSize = 20;
 let _drops = [];
+let _dropsLength = 1;
 
 // Init
 function init() {
@@ -19,9 +22,32 @@ function init() {
 
 }
 
-// Push column
-function AddDrop(element) {
-    _drops.push(element);
+function initDropLenght(size) {
+  _dropsLength = size;
+}
+
+// Push drop
+function addDrop() {
+
+    // Select random element
+    let charIndex = Math.floor(Math.random()*26);     // Range 0-25
+    let charElement = Math.floor(Math.random()*2)+1;  // Range 1-2
+    let element = Characters[charIndex][charElement];
+
+    // Set max length
+    let maxLength = Math.floor(_height/_dropBoxSize);
+
+    if(_drops.length < _dropsLength){
+          _drops.push(element);
+          // _.shuffle(_drops);
+      }
+      else {
+        
+        _drops.unshift(' ');
+
+        if(_drops[maxLength])
+          _drops.pop();
+      }
 }
 
 let AppStore = assign({}, EventEmitter.prototype, {
@@ -30,8 +56,16 @@ let AppStore = assign({}, EventEmitter.prototype, {
     return _width;
   },
 
+  getHeight() {
+    return _height;
+  },
+
   getDrops() {
     return _drops;
+  },
+
+  getDropBoxSize() {
+    return _dropBoxSize;
   },
 
   // Allow Controller-View to register itself with store
@@ -59,8 +93,12 @@ AppDispatcher.register(function(payload) {
         init();
         break;
 
+      case Constants.ActionTypes.CREATE_DROPS:
+        initDropLenght(action.size);
+        break;
+
       case Constants.ActionTypes.ADD_DROP:
-        AddDrop(action.element);
+        addDrop();
         break;
 
         default:

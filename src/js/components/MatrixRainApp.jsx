@@ -1,5 +1,5 @@
 const React = require('react');
-const Column =require('./Column.jsx');
+const Drop =require('./Drop.jsx');
 const AppActions = require('../actions/AppActions');
 const AppStore = require('../stores/AppStore');
 
@@ -8,7 +8,8 @@ AppActions.initApp();
 
 function getState() {
 	return {
-		width: AppStore.getWidth()
+		width: AppStore.getWidth(),
+		height: AppStore.getHeight()
 	};
 }
 
@@ -16,15 +17,10 @@ function getState() {
 let App = React.createClass({
 
   render() {
-
-  	let min = 100;
-  	let max = 1500;
-
-  	let interval = Math.floor(Math.random() * (max - min)) + min;
     
     return (
       <div>
-          <Column interval={interval} />
+          <Drop />
       </div>
     );
   }

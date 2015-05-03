@@ -4,6 +4,7 @@ module.exports = {
 
   ActionTypes: keyMirror({
     INIT: null,
+    CREATE_DROPS: null,
     ADD_DROP: null
   }),
 
