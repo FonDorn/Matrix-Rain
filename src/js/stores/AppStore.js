@@ -14,30 +14,28 @@ let _height = 0;
 let _dropBoxSize = 20;
 let _drops = [];
 let _dropsLength = 1;
+let _maxLength = 5;
 
 // Init
 function init() {
   _width = jquery(window).width();
   _height = jquery(window).height();
+  _maxLength = Math.floor(_height/_dropBoxSize);
 
 }
 
 function initDropLenght() {
   let min = 5;
-  let max = Math.floor(_height/_dropBoxSize);
-  _dropsLength =  Math.floor(Math.random() * (max - min)) + min;
+  let max = _maxLength;
+  _dropsLength =  _.random(min,max);
 }
 
 // Push drop
 function addDrop() {
 
     // Select random element
-    let charIndex = Math.floor(Math.random()*26);     // Range 0-25
-    let charElement = Math.floor(Math.random()*2)+1;  // Range 1-2
-    let element = Characters[charIndex][charElement];
-
-    // Set max length
-    let maxLength = Math.floor(_height/_dropBoxSize);
+    let charIndex =  _.random(Characters.length);
+    let element = Characters[charIndex];    
 
     if(_drops.length < _dropsLength){
           _drops.unshift(element);
@@ -51,7 +49,7 @@ function addDrop() {
         
         _drops.unshift(' ');
 
-        if(_drops[maxLength])
+        if(_drops[_maxLength])
           _drops.pop();
 
       }

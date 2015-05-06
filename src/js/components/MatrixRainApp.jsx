@@ -28,6 +28,7 @@ let App = React.createClass({
 
 		return (
 		  <div>
+		  		
 				<Drop />
 		  </div>
 		);

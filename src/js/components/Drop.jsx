@@ -19,7 +19,7 @@ function createDrops() {
 
 		AppActions.addDrop(); 
 
-	}, interval);
+	}, ( Math.floor(Math.random() * (max - min)) + min ));
 
 }
 
