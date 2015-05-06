@@ -9,16 +9,21 @@ module.exports = {
     });
   },
 
-  createDrops: function(size) {
+  createDrops: function() {
     AppDispatcher.handleAction({
-      type: Constants.ActionTypes.CREATE_DROPS,
-      size: size
+      type: Constants.ActionTypes.CREATE_DROPS
     });
   },
 
   addDrop: function() {
     AppDispatcher.handleAction({
       type: Constants.ActionTypes.ADD_DROP
+    });
+  },
+
+  removeDrop: function() {
+    AppDispatcher.handleAction({
+      type: Constants.ActionTypes.REMOVE_DROP
     });
   }
 

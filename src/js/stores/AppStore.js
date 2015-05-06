@@ -22,8 +22,10 @@ function init() {
 
 }
 
-function initDropLenght(size) {
-  _dropsLength = size;
+function initDropLenght() {
+  let min = 5;
+  let max = Math.floor(_height/_dropBoxSize);
+  _dropsLength =  Math.floor(Math.random() * (max - min)) + min;
 }
 
 // Push drop
@@ -38,15 +40,20 @@ function addDrop() {
     let maxLength = Math.floor(_height/_dropBoxSize);
 
     if(_drops.length < _dropsLength){
-          _drops.push(element);
+          _drops.unshift(element);
           // _.shuffle(_drops);
       }
-      else {
+    else if(_.last(_drops) === ' ') {
+          _drops = [];
+          initDropLenght();
+      }
+    else {
         
         _drops.unshift(' ');
 
         if(_drops[maxLength])
           _drops.pop();
+
       }
 }
 
@@ -94,11 +101,15 @@ AppDispatcher.register(function(payload) {
         break;
 
       case Constants.ActionTypes.CREATE_DROPS:
-        initDropLenght(action.size);
+        initDropLenght();
         break;
 
       case Constants.ActionTypes.ADD_DROP:
         addDrop();
+        break;
+
+      case Constants.ActionTypes.REMOVE_DROP:
+        removeDrop();
         break;
 
         default:

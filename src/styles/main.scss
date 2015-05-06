@@ -21,6 +21,8 @@ $drop-size:	  18px;
 
 .app-drops {
 	width: $drop-width;
+
+	float: left;
 }
 
 .app-drops p {

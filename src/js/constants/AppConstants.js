@@ -5,7 +5,8 @@ module.exports = {
   ActionTypes: keyMirror({
     INIT: null,
     CREATE_DROPS: null,
-    ADD_DROP: null
+    ADD_DROP: null,
+    REMOVE_DROP: null
   }),
 
   ActionSources: keyMirror({

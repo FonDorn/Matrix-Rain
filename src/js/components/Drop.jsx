@@ -3,28 +3,21 @@ const AppActions = require('../actions/AppActions');
 const AppStore = require('../stores/AppStore');
 const _ = require('underscore');
 
-function createDrops(height, dropBox, drops) {
+
+function createDrops() {	
 
 	// Set Interval
 	let min = 50;
-  	let max = 500;
+  	let max = 150;
   	let interval = Math.floor(Math.random() * (max - min)) + min;
-  	
-  	// Set Drops Size
-  	min = 5;
-  	max = Math.floor(height/dropBox)
-  	let dropSize = Math.floor(Math.random() * (max - min)) + min;
 
   	// Create Drops
-  	AppActions.createDrops(dropSize);
+  	AppActions.createDrops();
 
-  	// Add drop to Drops while last element === ' ' 
-	let intervalId = setInterval(function(){
+  	// Add drop to Drops
+	setInterval(function(){
 
-		AppActions.addDrop();
-
-		if(drops[max-1] === ' ')
-			clearInterval(intervalId);
+		AppActions.addDrop(); 
 
 	}, interval);
 
@@ -32,9 +25,7 @@ function createDrops(height, dropBox, drops) {
 
 function getState() {
 	return {
-		drops: AppStore.getDrops(),
-		height: AppStore.getHeight(),
-		dropBox: AppStore.getDropBoxSize()
+		drops: AppStore.getDrops()
 	};
 }
 
@@ -42,16 +33,15 @@ let Drop = React.createClass({
 
 	getInitialState() {
 
-		let state = getState();
-
 		// Create Drops
-		createDrops(state.height, state.dropBox, state.drops);
+		createDrops();
 		
-		return state;
+		return getState();
 	},
 
-	componentDidMount() {
+	componentDidMount() {		
 		AppStore.addChangeListener(this._onChange);
+
 	},
 
 	componentWillUnmount() {
